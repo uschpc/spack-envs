@@ -15,6 +15,7 @@ git clone --single-branch --depth 1 https://github.com/spack/spack
 Then set up Spack for your shell:
 
 ```
+module purge
 source ./spack/share/spack/setup-env.sh
 ```
 
@@ -69,6 +70,7 @@ which python
 In the future, make sure to activate Spack and then the environment in order to use this Python:
 
 ```
+module purge
 source ./spack/share/spack/setup-env.sh
 spack env activate -p python
 python
