@@ -30,4 +30,4 @@ spack:
       permissions:
         read: world
         write: user
-        group: user
+        group: ttrojan_123
