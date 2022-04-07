@@ -39,7 +39,7 @@ spack env create python python.yaml
 Assuming the environment is successfully created, activate it:
 
 ```
-spack env activate python
+spack env activate -p python
 ```
 
 ### Concretize and install environment
@@ -70,8 +70,14 @@ In the future, make sure to activate Spack and then the environment in order to 
 
 ```
 source ./spack/share/spack/setup-env.sh
-spack env activate python
+spack env activate -p python
 python
+```
+
+To deactivate the environment:
+
+```
+spack env deactivate
 ```
 
 ## License
