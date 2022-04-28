@@ -27,7 +27,7 @@ spack:
       flags: {}
   packages:
     all:
-      target: [zen3]
+      target: [x86_64_v3]
       compiler: [gcc@11.2.0]
       variants: +pic +ipo +shared ~docs ~doc ~man
       permissions:
