@@ -1,0 +1,40 @@
+# Spack environment for OpenMPI stack
+spack:
+  specs:
+  - vim
+  - hwloc ~cairo~cuda~gl+libudev+libxml2~netloc~nvml~opencl+pci~rocm+shared
+  - ucx ~assertions~backtrace-detail+cm+cma~cuda+dc+debug+dm~doc~examples~gdrcopy+ib-hw-tm~java~knem~logging+mlx5-dv+openmp+optimizations~parameter_checking+pic+rc+rdmacm~rocm+shared~static+thread_multiple~ucg+ud+verbs~xpmem opt=3 simd=avx
+  - openmpi +atomics~cuda+cxx+cxx_exceptions~gpfs~internal-hwloc~java+legacylaunchers~lustre~memchecker+pmi~singularity+static+vt+wrapper-rpath fabrics=ucx schedulers=slurm
+  concretization: together
+  view: true
+  config:
+    build_jobs: 4
+    checksum: true
+  compilers:
+  - compiler:
+      spec: gcc@11.2.0
+      paths:
+        cc: /spack/apps/gcc/11.2.0/bin/gcc
+        cxx: /spack/apps/gcc/11.2.0/bin/g++
+        f77: /spack/apps/gcc/11.2.0/bin/gfortran
+        fc: /spack/apps/gcc/11.2.0/bin/gfortran
+      operating_system: centos7
+      target: x86_64
+      modules: []
+      environment: {}
+      extra_rpaths: []
+      flags: {}
+  packages:
+    all:
+      target: [zen3]
+      compiler: [gcc@11.2.0]
+      variants: +pic +ipo +shared ~docs ~doc ~man
+      permissions:
+        read: world
+        write: user
+        group: ttrojan_123
+    slurm:
+      version: [21.08.6]
+      externals:
+      - spec: slurm@21.08.6
+        prefix: /usr
