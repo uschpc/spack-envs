@@ -40,8 +40,10 @@ spack env create python python.yaml
 Assuming the environment is successfully created, activate it:
 
 ```
-spack env activate -p python
+spack env activate python
 ```
+
+Add the `-p` option if you want the environment name added to the shell prompt: `spack env activate -p python`
 
 ### Concretize and install environment
 
@@ -61,18 +63,12 @@ If there are any failures, consult the error messages and try to debug and find 
 
 ## Usage
 
-After a successful install, the environment now has a version of Python:
-
-```
-which python
-```
-
-In the future, make sure to activate Spack and then the environment in order to use this Python:
+When a Spack environment is activated, all the installed software in the environment is loaded and becomes available for you to use. After a successful install of Python, for example, the environment now has a version of Python (check with `which python`). In the future, make sure to activate Spack and then the environment in order to use this version of Python:
 
 ```
 module purge
 source ./spack/share/spack/setup-env.sh
-spack env activate -p python
+spack env activate python
 python
 ```
 
@@ -81,6 +77,57 @@ To deactivate the environment:
 ```
 spack env deactivate
 ```
+
+## CPU microarchitectures on CARC clusters
+
+CARC HPC clusters have a heterogeneous mix of CPU models and therefore CPU microarchitectures. See the [Discovery Resource Overview](https://www.carc.usc.edu/user-information/user-guides/hpc-basics/discovery-resources) and [Endeavour Resource Overview](https://www.carc.usc.edu/user-information/user-guides/hpc-basics/endeavour-resources) for more details.
+
+Spack can target specific CPU microarchitectures when building packages, which will improve performance when running applications on those specific CPU models compared to using a generic target. You can target a generic `x86_64` if you want to use your Spack environment on any compute node. A better approach is to target `x86_64_v3`, which includes AVX2 and will run on most compute nodes (those with AVX2 instructions). You can target the specific microarchitectures listed in the tables below, but your Spack environment may only run on those specific compute nodes. If it is worth it for your use case, you could also create multiple Spack environments where each one targets a specific microarchitecture, and then in Slurm jobs detect the microarchitecture you are running on and activate the corresponding environment (see [arch.sh](arch.sh)).
+
+To detect CPU microarchitectures on compute nodes, use `spack arch -t`.
+
+To specify a target for your environment, add it to the YAML file under:
+
+```
+packages:
+    all:
+      target: [x86_64_v3]
+```
+
+Replace `x86_64_v3` with your preferred target.
+
+
+The following table lists microarchitectures and vector extensions on Discovery nodes:
+
+| CPU model | Microarchitecture | Partitions | SSE | SSE2 | SSE3 | SSE4 | AVX | AVX2 | AVX-512 |
+|---|---|---|---|---|---|---|---|---|---|
+| xeon-2650v2 | ivybridge | oneweek, debug | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |  |
+| xeon-2640v3 | haswell | main, oneweek, debug | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |
+| xeon-2640v4 | broadwell | main, gpu, debug| &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |
+| xeon-4116 | skylake_avx512 | main | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |
+| xeon-6130 | skylake_avx512 | gpu | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |
+| epyc-7542 | zen2 | epyc-64 | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |
+| epyc-7513 | zen3 | epyc-64, gpu, largemem | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |
+| epyc-7282 | zen2 | gpu | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |
+
+The following table lists microarchitectures and vector extensions on Endeavour condo nodes:
+
+| CPU model | Microarchitecture | SSE | SSE2 | SSE3 | SSE4 | AVX | AVX2 | AVX-512 |
+|---|---|---|---|---|---|---|---|---|
+| xeon-6248r | cascadelake | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |
+| xeon-4216 | cascadelake | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |
+| epyc-7542 | zen2 | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |
+| epyc-7532 | zen2 | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |
+| epyc-7282 | zen2 | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |
+
+Other legacy or purchased nodes may have different microarchitectures.
+
+## Additional resources
+
+[Spack website](https://spack.io/)  
+[Spack documentation](https://spack.readthedocs.io/en/latest/)  
+[Spack tutorials](https://spack-tutorial.readthedocs.io/en/latest/)  
+[Spack package search](https://spack.github.io/packages/)
 
 ## License
 
