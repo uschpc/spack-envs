@@ -99,26 +99,26 @@ Replace `x86_64_v3` with your preferred target.
 
 The following table lists microarchitectures and vector extensions on Discovery nodes:
 
-| CPU model | Microarchitecture | Partitions | SSE | SSE2 | SSE3 | SSE4 | AVX | AVX2 | AVX-512 |
-|---|---|---|---|---|---|---|---|---|---|
-| xeon-2650v2 | ivybridge | oneweek, debug | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |  |
-| xeon-2640v3 | haswell | main, oneweek, debug | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |
-| xeon-2640v4 | broadwell | main, gpu, debug| &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |
-| xeon-4116 | skylake_avx512 | main | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |
-| xeon-6130 | skylake_avx512 | gpu | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |
-| epyc-7542 | zen2 | epyc-64 | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |
-| epyc-7513 | zen3 | epyc-64, gpu, largemem | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |
-| epyc-7282 | zen2 | gpu | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |
+| CPU model | Microarchitecture | Partitions | AVX | AVX2 | AVX-512 |
+|---|---|---|---|---|---|
+| xeon-2650v2 | ivybridge | oneweek, debug | &#10003; |  |  |
+| xeon-2640v3 | haswell | main, oneweek, debug | &#10003; | &#10003; |  |
+| xeon-2640v4 | broadwell | main, gpu, debug | &#10003; | &#10003; |  |
+| xeon-4116 | skylake_avx512 | main | &#10003; | &#10003; | &#10003; |
+| xeon-6130 | skylake_avx512 | gpu | &#10003; | &#10003; | &#10003; |
+| epyc-7542 | zen2 | epyc-64 | &#10003; | &#10003; |  |
+| epyc-7513 | zen3 | epyc-64, gpu, largemem | &#10003; | &#10003; |  |
+| epyc-7282 | zen2 | gpu | &#10003; | &#10003; |  |
 
 The following table lists microarchitectures and vector extensions on Endeavour condo nodes:
 
-| CPU model | Microarchitecture | SSE | SSE2 | SSE3 | SSE4 | AVX | AVX2 | AVX-512 |
-|---|---|---|---|---|---|---|---|---|
-| xeon-6248r | cascadelake | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |
-| xeon-4216 | cascadelake | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |
-| epyc-7542 | zen2 | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |
-| epyc-7532 | zen2 | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |
-| epyc-7282 | zen2 | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; |  |
+| CPU model | Microarchitecture | AVX | AVX2 | AVX-512 |
+|---|---|---|---|---|
+| xeon-6248r | cascadelake | &#10003; | &#10003; | &#10003; |
+| xeon-4216 | cascadelake | &#10003; | &#10003; | &#10003; |
+| epyc-7542 | zen2 | &#10003; | &#10003; |  |
+| epyc-7532 | zen2 | &#10003; | &#10003; |  |
+| epyc-7282 | zen2 | &#10003; | &#10003; |  |
 
 Other legacy or purchased nodes may have different microarchitectures.
 
