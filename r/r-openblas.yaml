@@ -3,7 +3,7 @@ spack:
   specs:
   - vim
   - cairo +X+fc+ft+gobject+pdf+png~svg
-  - python +bz2+ctypes+dbm~debug+libxml2+lzma+nis+optimizations+pic+pyexpat+pythoncmd+readline+shared+sqlite3+ssl~tix~tkinter~ucs4+uuid+zlib
+  - python +bz2+ctypes+dbm~debug+ensurepip+libxml2+lzma+nis+optimizations+pic+pyexpat+pythoncmd+readline+shared+sqlite3+ssl~tix~tkinter~ucs4+uuid+zlib
   - openblas ~bignuma~consistent_fpcsr~ilp64+locking+pic+shared symbol_suffix=none threads=openmp
   - r +X+external-lapack+memory_profiling+rmath ^openblas
   concretization: together
@@ -13,7 +13,7 @@ spack:
     checksum: true
   compilers:
   - compiler:
-      spec: gcc@11.2.0
+      spec: gcc@11.3.0
       paths:
         cc: /spack/apps/gcc/11.3.0/bin/gcc
         cxx: /spack/apps/gcc/11.3.0/bin/g++

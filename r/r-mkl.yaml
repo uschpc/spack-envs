@@ -3,7 +3,7 @@ spack:
   specs:
   - vim
   - cairo +X+fc+ft+gobject+pdf+png~svg
-  - python +bz2+ctypes+dbm~debug+libxml2+lzma+nis+optimizations+pic+pyexpat+pythoncmd+readline+shared+sqlite3+ssl~tix~tkinter~ucs4+uuid+zlib
+  - python +bz2+ctypes+dbm~debug+ensurepip+libxml2+lzma+nis+optimizations+pic+pyexpat+pythoncmd+readline+shared+sqlite3+ssl~tix~tkinter~ucs4+uuid+zlib
   - intel-oneapi-mkl ~cluster~ilp64+shared
   - r +X+external-lapack+memory_profiling+rmath ^intel-oneapi-mkl
   concretization: together
