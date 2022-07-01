@@ -127,7 +127,7 @@ Other legacy or purchased nodes may have different microarchitectures.
 [Spack website](https://spack.io/)  
 [Spack documentation](https://spack.readthedocs.io/en/latest/)  
 [Spack tutorials](https://spack-tutorial.readthedocs.io/en/latest/)  
-[Spack package search](https://spack.github.io/packages/)
+[Spack package search](https://packages.spack.io/)
 
 ## License
 
