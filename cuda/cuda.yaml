@@ -1,7 +1,6 @@
 # Spack environment for CUDA stack
 spack:
   specs:
-  - vim
   - cuda
   - cudnn
   concretizer:

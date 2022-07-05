@@ -1,7 +1,6 @@
 # Spack environment for MVAPICH2 stack
 spack:
   specs:
-  - vim
   - mvapich2 +alloca~cuda~debug+regcache+wrapperrpath ch3_rank_bits=32 fabrics=mrail file_systems=auto process_managers=auto threads=multiple
   concretizer:
     unify: true

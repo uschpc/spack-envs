@@ -1,7 +1,6 @@
 # Spack environment for MPICH stack
 spack:
   specs:
-  - vim
   - hwloc ~cairo~cuda~gl+libudev+libxml2~netloc~nvml~opencl+pci~rocm+shared
   - ucx ~assertions~backtrace-detail+cm+cma~cuda+dc+debug+dm~doc~examples~gdrcopy+ib-hw-tm~java~knem~logging+mlx5-dv+openmp+optimizations~parameter_checking+pic+rc+rdmacm~rocm+shared~static+thread_multiple~ucg+ud+verbs~xpmem opt=3 simd=avx
   - mpich ~argobots+fortran+hwloc+hydra+libxml2+pci+romio~slurm+verbs+wrapperrpath device=ch4 netmod=ucx pmi=pmi2

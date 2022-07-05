@@ -1,7 +1,6 @@
 # Spack environment for Python + MVAPICH2 stack
 spack:
   specs:
-  - vim
   - python +bz2+ctypes+dbm~debug+ensurepip+libxml2+lzma+nis+optimizations+pic+pyexpat+pythoncmd+readline+shared+sqlite3+ssl~tix~tkinter~ucs4+uuid+zlib
   - mvapich2 +alloca~cuda~debug+regcache+wrapperrpath ch3_rank_bits=32 fabrics=mrail file_systems=auto process_managers=auto threads=multiple
   concretizer:
