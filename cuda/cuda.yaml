@@ -4,7 +4,8 @@ spack:
   - vim
   - cuda
   - cudnn
-  concretization: together
+  concretizer:
+    unify: true
   view: true
   config:
     build_jobs: 4

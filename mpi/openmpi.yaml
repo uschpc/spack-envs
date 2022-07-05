@@ -5,7 +5,8 @@ spack:
   - hwloc ~cairo~cuda~gl+libudev+libxml2~netloc~nvml~opencl+pci~rocm+shared
   - ucx ~assertions~backtrace-detail+cm+cma~cuda+dc+debug+dm~doc~examples~gdrcopy+ib-hw-tm~java~knem~logging+mlx5-dv+openmp+optimizations~parameter_checking+pic+rc+rdmacm~rocm+shared~static+thread_multiple~ucg+ud+verbs~xpmem opt=3 simd=avx
   - openmpi +atomics~cuda+cxx+cxx_exceptions~gpfs~internal-hwloc~java+legacylaunchers~lustre~memchecker+pmi~singularity+static+vt+wrapper-rpath fabrics=ucx schedulers=slurm
-  concretization: together
+  concretizer:
+    unify: true
   view: true
   config:
     build_jobs: 4
