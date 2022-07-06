@@ -1,7 +1,7 @@
 # Spack environment for CUDA stack
 spack:
   specs:
-  - cuda
+  - cuda@11.6.2
   - cudnn
   concretizer:
     unify: true
