@@ -2,8 +2,8 @@
 spack:
   specs:
   - hwloc ~cairo~cuda~gl+libudev+libxml2~netloc~nvml~opencl+pci~rocm+shared
-  - ucx ~assertions~backtrace-detail+cm+cma~cuda+dc+debug+dm~doc~examples~gdrcopy+ib-hw-tm~java~knem~logging+mlx5-dv+openmp+optimizations~parameter_checking+pic+rc+rdmacm~rocm+shared~static+thread_multiple~ucg+ud+verbs~xpmem opt=3 simd=avx
-  - mpich ~argobots+fortran+hwloc+hydra+libxml2+pci+romio~slurm+verbs+wrapperrpath device=ch4 netmod=ucx pmi=pmi2
+  - ucx ~assertions~backtrace_detail+cma~cuda+dc+debug+dm~examples~gdrcopy~ib_hw_tm~java~knem~logging+mlx5_dv+openmp+optimizations~parameter_checking+pic+rc~rdmacm~rocm+thread_multiple~ucg+ud+verbs~vfs~xpmem cuda_arch=none libs=shared,static opt=3 simd=auto
+  - mpich ~argobots~cuda+fortran~hcoll+hwloc+hydra+libxml2+pci~rocm+romio+slurm~two_level_namespace~vci+verbs+wrapperrpath datatype-engine=dataloop device=ch4 netmod=ucx pmi=pmi2
   concretizer:
     unify: true
   view: true
@@ -33,3 +33,8 @@ spack:
         read: world
         write: user
         group: ttrojan_123
+    slurm:
+      version: [21-08-8-2]
+      externals:
+      - spec: slurm@21-08-8-2
+        prefix: /usr
