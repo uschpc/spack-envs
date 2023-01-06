@@ -1,10 +1,9 @@
 # Spack environment for OpenMPI stack
 spack:
   specs:
-  - hwloc ~cairo~cuda~gl+libudev+libxml2~netloc~nvml~opencl+pci~rocm+shared
-  - pmix@3.2.3 ~docs+pmi_backwards_compatibility~restful
-  - ucx ~assertions~backtrace_detail+cma~cuda+dc+debug+dm~examples~gdrcopy~ib_hw_tm~java~knem~logging+mlx5_dv+openmp+optimizations~parameter_checking+pic+rc~rdmacm~rocm+thread_multiple~ucg+ud+verbs~vfs~xpmem cuda_arch=none libs=shared,static opt=3 simd=auto
-  - openmpi +atomics~cuda+cxx+cxx_exceptions~gpfs~internal-hwloc~java+legacylaunchers~lustre~memchecker~pmi+romio+rsh~singularity+static+vt+wrapper-rpath fabrics=ucx schedulers=slurm
+  - pmix@3.2.3
+  - ucx +cma+dc~examples+mlx5_dv+rc+thread_multiple+ud+verbs
+  - openmpi +atomics+cxx+cxx_exceptions+legacylaunchers fabrics=ucx schedulers=slurm
   concretizer:
     unify: true
   view: true
