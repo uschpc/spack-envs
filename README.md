@@ -1,18 +1,20 @@
 # Custom Spack environments for CARC systems
 
-This repo contains template YAML files for creating custom Spack software environments for use on CARC systems.
+This repo contains template YAML files for creating custom [Spack](https://spack.io/) software environments for use on CARC systems.
 
 ## Installation
 
 ### Install Spack
 
-First, download the latest (development) version of Spack into one of your directories:
+The template files have been developed and tested using Spack v0.19.0. They may need to be modified if using a different version of Spack.
+
+First, download Spack into one of your directories:
 
 ```
-git clone --single-branch --depth 1 https://github.com/spack/spack
+git clone --branch v0.19.0 --depth 1 https://github.com/spack/spack
 ```
 
-Then set up Spack for your shell:
+Then, set up Spack for your shell:
 
 ```
 module purge
