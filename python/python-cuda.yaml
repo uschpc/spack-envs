@@ -1,7 +1,7 @@
 # Spack environment for Python + CUDA stack
 spack:
   specs:
-  - python +bz2+ctypes+dbm~debug+ensurepip+libxml2+lzma+nis+optimizations+pic+pyexpat+pythoncmd+readline+shared+sqlite3+ssl~tix~tkinter~ucs4+uuid+zlib
+  - python +optimizations
   - cuda@11.6.2
   - cudnn
   concretizer:
