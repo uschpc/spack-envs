@@ -1,9 +1,9 @@
 # Spack environment for R stack using Intel oneAPI MKL
 spack:
   specs:
-  - cairo +X+fc+ft+gobject+pdf+png~svg
-  - python +bz2+ctypes+dbm~debug+ensurepip+libxml2+lzma+nis+optimizations+pic+pyexpat+pythoncmd+readline+shared+sqlite3+ssl~tix~tkinter~ucs4+uuid+zlib
-  - intel-oneapi-mkl ~cluster~ilp64+shared
+  - cairo +X+fc+ft+gobject+pdf+png
+  - python +optimizations
+  - intel-oneapi-mkl
   - r +X+external-lapack+memory_profiling+rmath ^intel-oneapi-mkl
   concretizer:
     unify: true
