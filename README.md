@@ -1,6 +1,6 @@
-# Custom Spack environments for CARC systems
+# Custom Spack environments for USC CARC HPC clusters
 
-This repo contains template YAML files for creating custom [Spack](https://spack.io/) software environments for use on CARC systems.
+This repo contains template YAML files for creating custom [Spack](https://spack.io/) software environments for use on USC CARC HPC clusters.
 
 ## Installation
 
@@ -80,7 +80,7 @@ To deactivate the environment:
 spack env deactivate
 ```
 
-## CPU microarchitectures on CARC clusters
+## CPU microarchitectures on USC CARC HPC clusters
 
 CARC HPC clusters have a heterogeneous mix of CPU models and therefore CPU microarchitectures. See the [Discovery Resource Overview](https://www.carc.usc.edu/user-information/user-guides/hpc-basics/discovery-resources) and [Endeavour Resource Overview](https://www.carc.usc.edu/user-information/user-guides/hpc-basics/endeavour-resources) for more details.
 
@@ -126,10 +126,10 @@ Other legacy or purchased nodes may have different microarchitectures.
 
 ## Additional resources
 
-[Spack website](https://spack.io/)  
-[Spack documentation](https://spack.readthedocs.io/en/latest/)  
-[Spack tutorials](https://spack-tutorial.readthedocs.io/en/latest/)  
-[Spack package search](https://packages.spack.io/)
+- [Spack website](https://spack.io/)
+- [Spack documentation](https://spack.readthedocs.io/en/latest/)
+- [Spack tutorials](https://spack-tutorial.readthedocs.io/en/latest/)
+- [Spack package search](https://packages.spack.io/)
 
 ## License
 
