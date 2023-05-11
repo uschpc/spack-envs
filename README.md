@@ -6,12 +6,12 @@ This repo contains template YAML files for creating custom [Spack](https://spack
 
 ### Install Spack
 
-The template files have been developed and tested using Spack v0.19.0. They may need to be modified if using a different version of Spack.
+The template files have been developed and tested using Spack v0.19.2. They may need to be modified if using a different version of Spack.
 
 First, download Spack into one of your directories:
 
 ```
-git clone --branch v0.19.0 --depth 1 https://github.com/spack/spack
+git clone --branch v0.19.2 --depth 1 https://github.com/spack/spack
 ```
 
 Then, set up Spack for your shell:
@@ -45,7 +45,11 @@ Assuming the environment is successfully created, activate it:
 spack env activate python
 ```
 
-Add the `-p` option if you want the environment name added to the shell prompt: `spack env activate -p python`
+Add the `-p` option if you want the environment name added to the shell prompt:
+
+```
+spack env activate -p python
+```
 
 ### Concretize and install environment
 
@@ -103,14 +107,15 @@ The following table lists microarchitectures and vector extensions on Discovery 
 
 | CPU model | Microarchitecture | Partitions | AVX | AVX2 | AVX-512 |
 |---|---|---|---|---|---|
-| xeon-2650v2 | ivybridge | oneweek, debug | &#10003; |  |  |
-| xeon-2640v3 | haswell | main, oneweek, debug | &#10003; | &#10003; |  |
+| xeon-2650v2 | ivybridge | oneweek | &#10003; |  |  |
+| xeon-2640v3 | haswell | main, debug | &#10003; | &#10003; |  |
 | xeon-2640v4 | broadwell | main, gpu, debug | &#10003; | &#10003; |  |
 | xeon-4116 | skylake_avx512 | main | &#10003; | &#10003; | &#10003; |
 | xeon-6130 | skylake_avx512 | gpu | &#10003; | &#10003; | &#10003; |
 | epyc-7542 | zen2 | epyc-64 | &#10003; | &#10003; |  |
 | epyc-7513 | zen3 | epyc-64, gpu, largemem | &#10003; | &#10003; |  |
 | epyc-7282 | zen2 | gpu | &#10003; | &#10003; |  |
+| epyc-7313 | zen3 | gpu | &#10003; | &#10003; |  |
 
 The following table lists microarchitectures and vector extensions on Endeavour condo nodes:
 
