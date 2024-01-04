@@ -1,7 +1,7 @@
 # Spack environment for CUDA stack
 spack:
   specs:
-  - cuda@11.6.2
+  - cuda@11.8.0
   - cudnn
   concretizer:
     unify: true
@@ -27,7 +27,7 @@ spack:
     all:
       target: [x86_64_v3]
       compiler: [gcc@11.3.0]
-      variants: +pic +ipo +shared ~docs ~doc ~man
+      variants: +pic +ipo +shared ~docs ~doc ~man ~debug
       permissions:
         read: world
         write: user
