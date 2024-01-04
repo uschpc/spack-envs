@@ -2,9 +2,9 @@
 spack:
   specs:
   - python +optimizations
-  - pmix@3.2.3
+  - pmix@4.2.6
   - ucx +cma+dc~examples+mlx5_dv+rc+thread_multiple+ud+verbs
-  - openmpi +atomics+cxx+cxx_exceptions+legacylaunchers fabrics=ucx schedulers=slurm
+  - openmpi@4.1.6 +atomics+cxx+cxx_exceptions+legacylaunchers fabrics=ucx schedulers=slurm
   concretizer:
     unify: true
   view: true
@@ -29,8 +29,20 @@ spack:
     all:
       target: [x86_64_v3]
       compiler: [gcc@11.3.0]
-      variants: +pic +ipo +shared ~docs ~doc ~man
+      variants: +pic +ipo +shared ~docs ~doc ~man ~debug
       permissions:
         read: world
         write: user
         group: ttrojan_123
+    slurm:
+      buildable: false
+      version: [23-02-6-1]
+      externals:
+      - spec: slurm@23-02-6-1
+        prefix: /usr
+    rdma-core:
+      buildable: false
+      version: [44.0]
+      externals:
+      - spec: rdma-core@44.0
+        prefix: /usr
