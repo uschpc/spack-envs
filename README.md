@@ -6,18 +6,19 @@ This repo contains template YAML files for creating custom [Spack](https://spack
 
 ### Install Spack
 
-The template files have been developed and tested using Spack v0.19.2. They may need to be modified if using a different version of Spack.
+The template files have been developed and tested using Spack v0.21.0. They may need to be modified if using a different version of Spack.
 
 First, download Spack into one of your directories:
 
 ```
-git clone --branch v0.19.2 --depth 1 https://github.com/spack/spack
+git clone --branch v0.21.0 --depth 1 https://github.com/spack/spack
 ```
 
 Then, set up Spack for your shell:
 
 ```
 module purge
+export SPACK_PYTHON=/spack/2206/apps/linux-centos7-x86_64_v3/gcc-11.3.0/python-3.11.3-gl2q3yz/bin/python
 source ./spack/share/spack/setup-env.sh
 ```
 
@@ -26,7 +27,7 @@ source ./spack/share/spack/setup-env.sh
 To create an environment based on a template file, using a Python stack as an example, first download the template file:
 
 ```
-wget https://raw.githubusercontent.com/uschpc/spack-envs/main/python/python.yaml
+curl -LO https://raw.githubusercontent.com/uschpc/spack-envs/main/python/python.yaml
 ```
 
 Then modify the template file as needed (change group, add more packages, modify preferred versions and variants, specify target CPU architecture, etc.)
@@ -73,6 +74,7 @@ When a Spack environment is activated, all the installed software in the environ
 
 ```
 module purge
+export SPACK_PYTHON=/spack/2206/apps/linux-centos7-x86_64_v3/gcc-11.3.0/python-3.11.3-gl2q3yz/bin/python
 source ./spack/share/spack/setup-env.sh
 spack env activate python
 python
@@ -107,25 +109,28 @@ The following table lists microarchitectures and vector extensions on Discovery 
 
 | CPU model | Microarchitecture | Partitions | AVX | AVX2 | AVX-512 |
 |---|---|---|---|---|---|
-| xeon-2650v2 | ivybridge | oneweek | &#10003; |  |  |
-| xeon-2640v3 | haswell | main, debug | &#10003; | &#10003; |  |
-| xeon-2640v4 | broadwell | main, gpu, debug | &#10003; | &#10003; |  |
-| xeon-4116 | skylake_avx512 | main | &#10003; | &#10003; | &#10003; |
+| xeon-2640v3 | haswell | main | &#10003; | &#10003; |  |
+| xeon-2640v4 | broadwell | main, gpu, oneweek, debug | &#10003; | &#10003; |  |
+| xeon-4116 | skylake_avx512 | main, oneweek, debug | &#10003; | &#10003; | &#10003; |
 | xeon-6130 | skylake_avx512 | gpu | &#10003; | &#10003; | &#10003; |
 | epyc-7542 | zen2 | epyc-64 | &#10003; | &#10003; |  |
 | epyc-7513 | zen3 | epyc-64, gpu, largemem | &#10003; | &#10003; |  |
 | epyc-7282 | zen2 | gpu | &#10003; | &#10003; |  |
-| epyc-7313 | zen3 | gpu | &#10003; | &#10003; |  |
+| epyc-7313 | zen3 | gpu, debug | &#10003; | &#10003; |  |
 
 The following table lists microarchitectures and vector extensions on Endeavour condo nodes:
 
 | CPU model | Microarchitecture | AVX | AVX2 | AVX-512 |
 |---|---|---|---|---|
+| xeon-2640v3 | haswell | &#10003; | &#10003; |  |
+| xeon-2640v4 | broadwell | &#10003; | &#10003; |  |
 | xeon-6248r | cascadelake | &#10003; | &#10003; | &#10003; |
 | xeon-4216 | cascadelake | &#10003; | &#10003; | &#10003; |
 | epyc-7542 | zen2 | &#10003; | &#10003; |  |
+| epyc-7513 | zen3 | &#10003; | &#10003; |  |
 | epyc-7532 | zen2 | &#10003; | &#10003; |  |
 | epyc-7282 | zen2 | &#10003; | &#10003; |  |
+| epyc-9354 | zen4 | &#10003; | &#10003; | &#10003; |
 
 Other legacy or purchased nodes may have different microarchitectures.
 
