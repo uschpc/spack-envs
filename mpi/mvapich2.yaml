@@ -26,8 +26,14 @@ spack:
     all:
       target: [x86_64_v3]
       compiler: [gcc@11.3.0]
-      variants: +pic +ipo +shared ~docs ~doc ~man
+      variants: +pic +ipo +shared ~docs ~doc ~man ~debug
       permissions:
         read: world
         write: user
         group: ttrojan_123
+    rdma-core:
+      buildable: false
+      version: [44.0]
+      externals:
+      - spec: rdma-core@44.0
+        prefix: /usr
