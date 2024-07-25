@@ -1,17 +1,15 @@
 # Custom Spack environments for CARC HPC clusters
 
-This repo contains template YAML files for creating custom [Spack](https://spack.io/) software environments for use on CARC HPC clusters.
+This repo contains template YAML files for creating custom software environments with [Spack](https://spack.io/) for use on CARC HPC clusters.
 
 ## Installation
 
 ### Install Spack
 
-The template files have been developed and tested using Spack v0.21.0. They may need to be modified if using a different version of Spack.
-
 First, download Spack into one of your directories:
 
 ```
-git clone --branch v0.21.0 --depth 1 https://github.com/spack/spack
+git clone --single-branch --depth 1 https://github.com/spack/spack
 ```
 
 Then, set up Spack for your shell:
@@ -24,13 +22,13 @@ source ./spack/share/spack/setup-env.sh
 
 ### Create Spack environment
 
-To create an environment based on a template file, using a Python stack as an example, first download the template file:
+To create an environment based on a template file, using a Python environment as an example, first download the template file:
 
 ```
 curl -LO https://raw.githubusercontent.com/uschpc/spack-envs/main/python/python.yaml
 ```
 
-Then modify the template file as needed (change group, add more packages, modify preferred versions and variants, specify target CPU architecture, etc.)
+Then modify the template file as needed (add more packages, modify preferred versions and variants, specify target CPU microarchitecture, etc.)
 
 Next create a named environment:
 
@@ -46,31 +44,42 @@ Assuming the environment is successfully created, activate it:
 spack env activate python
 ```
 
-Add the `-p` option if you want the environment name added to the shell prompt:
-
-```
-spack env activate -p python
-```
-
 ### Concretize and install environment
 
-If desired, first concretize the environment to see exactly what will be installed:
+First concretize the environment to see exactly what packages will be installed:
 
 ```
 spack concretize
 ```
 
-If needed, adjust the environment specs with `spack config edit` and reconcretize with `spack concretize -f`. Then install:
+If needed, adjust the environment specs with `spack config edit` and reconcretize with `spack concretize -f`. Enable or disable package variants depending on your needs.
+
+Then install the packages:
 
 ```
 spack install
 ```
 
-If there are any failures, consult the error messages and try to debug and find solutions to the failures. Feel free to submit a support ticket.
+If there are any failures, consult the error messages and try to debug and find solutions to the failures. Feel free to submit a support ticket if you need help.
+
+### Shared group installations
+
+For shared group installations in a /project directory, make sure to add the correct group ownership to the environment YAML file. For example, if installing into /project/ttrojan_123, add ttrojan_123 as the group under:
+
+```
+packages:
+  all:
+    permissions:
+      read: world
+      write: user
+      group: ttrojan_123
+```
+
+Otherwise, you may encounter disk quota issues resulting from incorrect group ownership of files.
 
 ## Usage
 
-When a Spack environment is activated, all the installed software in the environment is loaded and becomes available for you to use. After a successful install of Python, for example, the environment now has a version of Python (check with `which python`). In the future, make sure to activate Spack and then the environment in order to use this version of Python:
+When a Spack environment is activated, all the installed software in the environment is loaded and becomes available for you to use. After a successful installation of Python, for example, the environment now has a version of Python (check with `type python`). In future shell sessions, make sure to activate Spack and then the environment in order to use this version of Python:
 
 ```
 module purge
@@ -88,22 +97,23 @@ spack env deactivate
 
 ## CPU microarchitectures on CARC HPC clusters
 
-CARC HPC clusters have a heterogeneous mix of CPU models and therefore CPU microarchitectures. See the [Discovery Resource Overview](https://www.carc.usc.edu/user-information/user-guides/hpc-basics/discovery-resources) and [Endeavour Resource Overview](https://www.carc.usc.edu/user-information/user-guides/hpc-basics/endeavour-resources) for more details.
+CARC HPC clusters have a heterogeneous mix of CPU models and therefore CPU microarchitectures. Spack can target specific CPU microarchitectures when building packages, which will improve performance when running applications on those specific CPU models compared to using a generic target. You can target a generic `x86_64_v3` if you want to use your Spack environment on any compute node. You can target the specific microarchitectures listed in the tables below, but your Spack environment may only run on those specific compute nodes. If it is worth it for your use case, you could also create multiple Spack environments where each one targets a specific microarchitecture, and then in Slurm jobs detect the microarchitecture you are running on and activate the corresponding environment (see [arch.sh](arch.sh)).
 
-Spack can target specific CPU microarchitectures when building packages, which will improve performance when running applications on those specific CPU models compared to using a generic target. You can target a generic `x86_64` if you want to use your Spack environment on any compute node. A better approach is to target `x86_64_v3`, which includes AVX2 and will run on most compute nodes (those with AVX2 instructions). You can target the specific microarchitectures listed in the tables below, but your Spack environment may only run on those specific compute nodes. If it is worth it for your use case, you could also create multiple Spack environments where each one targets a specific microarchitecture, and then in Slurm jobs detect the microarchitecture you are running on and activate the corresponding environment (see [arch.sh](arch.sh)).
+To detect the CPU microarchitecture on a compute node:
 
-To detect CPU microarchitectures on compute nodes, use `spack arch -t`.
+```
+spack arch -t
+```
 
 To specify a target for your environment, add it to the YAML file under:
 
 ```
 packages:
-    all:
-      target: [x86_64_v3]
+  all:
+    target: [x86_64_v3]
 ```
 
-Replace `x86_64_v3` with your preferred target.
-
+If desired, replace `x86_64_v3` with your preferred target.
 
 The following table lists microarchitectures and vector extensions on Discovery nodes:
 
@@ -113,10 +123,12 @@ The following table lists microarchitectures and vector extensions on Discovery 
 | xeon-2640v4 | broadwell | main, gpu, oneweek, debug | &#10003; | &#10003; |  |
 | xeon-4116 | skylake_avx512 | main, oneweek, debug | &#10003; | &#10003; | &#10003; |
 | xeon-6130 | skylake_avx512 | gpu | &#10003; | &#10003; | &#10003; |
-| epyc-7542 | zen2 | epyc-64 | &#10003; | &#10003; |  |
-| epyc-7513 | zen3 | epyc-64, gpu, largemem | &#10003; | &#10003; |  |
+| epyc-7542 | zen2 | main, epyc-64 | &#10003; | &#10003; |  |
 | epyc-7282 | zen2 | gpu | &#10003; | &#10003; |  |
+| epyc-7513 | zen3 | epyc-64, gpu, largemem | &#10003; | &#10003; |  |
 | epyc-7313 | zen3 | gpu, debug | &#10003; | &#10003; |  |
+| epyc-9354 | zen4 | largemem | &#10003; | &#10003; | &#10003; |
+| epyc-9534 | zen4 | gpu | &#10003; | &#10003; | &#10003; |
 
 The following table lists microarchitectures and vector extensions on Endeavour condo nodes:
 
@@ -124,13 +136,18 @@ The following table lists microarchitectures and vector extensions on Endeavour 
 |---|---|---|---|---|
 | xeon-2640v3 | haswell | &#10003; | &#10003; |  |
 | xeon-2640v4 | broadwell | &#10003; | &#10003; |  |
-| xeon-6248r | cascadelake | &#10003; | &#10003; | &#10003; |
-| xeon-4216 | cascadelake | &#10003; | &#10003; | &#10003; |
+| xeon-6226r | cascadelake | &#10003; | &#10003; | &#10003; |
+| xeon-6130 | skylake_avx512 | &#10003; | &#10003; | &#10003; |
 | epyc-7542 | zen2 | &#10003; | &#10003; |  |
-| epyc-7513 | zen3 | &#10003; | &#10003; |  |
 | epyc-7532 | zen2 | &#10003; | &#10003; |  |
+| epyc-7502 | zen2 | &#10003; | &#10003; |  |
+| epyc-7502p | zen2 | &#10003; | &#10003; |  |
 | epyc-7282 | zen2 | &#10003; | &#10003; |  |
+| epyc-7513 | zen3 | &#10003; | &#10003; |  |
+| epyc-7313 | zen3 | &#10003; | &#10003; |  |
+| epyc-9124 | zen4 | &#10003; | &#10003; | &#10003; |
 | epyc-9354 | zen4 | &#10003; | &#10003; | &#10003; |
+| epyc-9554 | zen4 | &#10003; | &#10003; | &#10003; |
 
 Other legacy or purchased nodes may have different microarchitectures.
 
