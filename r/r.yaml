@@ -1,13 +1,13 @@
-# Spack environment for R stack using OpenBLAS
+# Spack environment for R using OpenBLAS
 spack:
   specs:
-  - cairo +X+fc+ft+gobject+pdf+png
-  - python +optimizations
+  - r +X+memory_profiling+rmath ^openblas
   - openblas threads=openmp
-  - r +X+external-lapack+memory_profiling+rmath ^openblas
+  - python +optimizations
+  - cairo +X+fc+ft+gobject+pdf+png
+  view: true
   concretizer:
     unify: true
-  view: true
   config:
     build_jobs: 4
     checksum: true
@@ -29,8 +29,7 @@ spack:
     all:
       target: [x86_64_v3]
       compiler: [gcc@11.3.0]
-      variants: +pic +ipo +shared ~docs ~doc ~man ~debug
+      variants: +pic +ipo +shared
       permissions:
         read: world
         write: user
-        group: ttrojan_123
