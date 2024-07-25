@@ -1,10 +1,10 @@
-# Spack environment for MVAPICH2 stack
+# Spack environment for MVAPICH2
 spack:
   specs:
-  - mvapich2 +alloca
+  - mvapich2
+  view: true
   concretizer:
     unify: true
-  view: true
   config:
     build_jobs: 4
     checksum: true
@@ -26,14 +26,7 @@ spack:
     all:
       target: [x86_64_v3]
       compiler: [gcc@11.3.0]
-      variants: +pic +ipo +shared ~docs ~doc ~man ~debug
+      variants: +pic +ipo +shared
       permissions:
         read: world
         write: user
-        group: ttrojan_123
-    rdma-core:
-      buildable: false
-      version: [44.0]
-      externals:
-      - spec: rdma-core@44.0
-        prefix: /usr
