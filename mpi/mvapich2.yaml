@@ -2,6 +2,7 @@
 spack:
   specs:
   - mvapich2
+  - python +optimizations
   view: true
   concretizer:
     unify: true
