@@ -4,7 +4,7 @@
 
 source /project/ttrojan_123/spack.sh
 
-arch=$(spack arch -t)
+arch="$(spack arch -t)"
 
 if [[ "$arch" = "skylake_avx512" ]]; then
   spack env activate myenv-skylake-avx512
